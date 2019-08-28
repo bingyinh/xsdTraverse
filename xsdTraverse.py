@@ -52,6 +52,11 @@ class xsdTraverse():
         elif isinstance(dictform, str):
             print level*'---' + dictform
 
+    # a function to print out the hierachical structure by the given type
+    def printTraversalByType(self, myname, mytype):
+        dictform = self.xsd2dictHelper(myname, mytype)
+        self.printTraversal(dictform)
+        
     # a function to collect the xpath of leaf nodes
     def getLeaf(self, dictform, xpath=''):
         # either input a dict or a str
@@ -78,6 +83,6 @@ class xsdTraverse():
 
 
 if __name__ == '__main__':
-    xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_081218.xsd')
+    xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_081319.xsd')
     # xsdt.printTraversal(xsdt.dictform)
-    xsdt.outputLeaf()
+    # xsdt.outputLeaf()
