@@ -46,11 +46,11 @@ class xsdTraverse():
         # either input a dict or a str
         if isinstance(dictform, dict):
             for key in dictform:
-                print level*'---' + key
+                print(level*'---' + key)
                 for ele in dictform[key]: # dictform[key] is a list
                     self.printTraversal(ele, level+1)
         elif isinstance(dictform, str):
-            print level*'---' + dictform
+            print(level*'---' + dictform)
 
     # a function to print out the hierachical structure by the given type
     def printTraversalByType(self, myname, mytype):
@@ -81,7 +81,31 @@ class xsdTraverse():
         # rootName = self.root.attrib['name']
         self.dictform = self.xsd2dictHelper(self.tree.find(".//*[@type='%s']" %(testtype)).get('name'), testtype)
 
-
+    # sort subelements of a given xpath
+    # example xpath: PolymerNanocomposite/MATERIALS/Matrix/MatrixComponent
+    def sortSubElementsByPath(self, tree, xpath):
+        tags = xpath.split('/')
+        root = tags[0]
+        listOI = self.dictform[root] # element list of interest, updated with the tags
+        if len(tags) > 1:
+            for t in range(1,len(tags)):
+                tag = tags[t]
+                for eleDict in listOI:
+                    if tag in eleDict:
+                        listOI = eleDict[tag]
+                        continue
+        sequence = dict() # get a sequence dict
+        for item in range(len(listOI)):
+            if isinstance(listOI[item], dict):
+                sequence[list(listOI[item].keys())[0]] = item
+            else: # should be str
+                sequence[listOI[item]] = item
+        # sort by sequence, start sorting
+        assert (root == tree.getroot().tag)
+        tags[0] = '.' # replace root with '.'
+        for ele in tree.findall('/'.join(tags)):
+            ele[:] = sorted(ele, key = lambda x:sequence[x.tag])
+        
 if __name__ == '__main__':
     xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_081319.xsd')
     # xsdt.printTraversal(xsdt.dictform)
