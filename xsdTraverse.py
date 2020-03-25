@@ -72,7 +72,7 @@ class xsdTraverse():
 
     # a funtion that outputs the collected xpath of leaf nodes to csv
     def outputLeaf(self):
-        with open('leaf.csv','wb') as f:
+        with open('leaf.csv','w',newline="",encoding="utf8") as f:
             for lf in self.leaf:
                 f.write(lf + '\n')
         print("XPath of leaf nodes is written in leaf.csv")
@@ -107,6 +107,6 @@ class xsdTraverse():
             ele[:] = sorted(ele, key = lambda x:sequence[x.tag])
         
 if __name__ == '__main__':
-    xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_081319.xsd')
+    xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_010720.xsd')
     # xsdt.printTraversal(xsdt.dictform)
-    # xsdt.outputLeaf()
+    xsdt.outputLeaf()
