@@ -26,10 +26,12 @@ class xsdTraverse():
     # 1) find the complexType with @name == mytype
     # 2) loop through its element
     # 3) make the recurrsive call with the type of elements if not xsd built-in
+    # TODO add support for structure-based dependency
     def xsd2dictHelper(self, myname, mytype):
         # base case
         # print("%s, %s" %(myname, mytype))
-        if mytype is None or mytype.find('xsd:') == 0:
+        # input("")
+        if mytype is None or mytype.find('xsd:') == 0 or mytype.find('xs:') == 0:
             return myname
         # general case
         currentLv = []
@@ -107,6 +109,7 @@ class xsdTraverse():
             ele[:] = sorted(ele, key = lambda x:sequence[x.tag])
         
 if __name__ == '__main__':
-    xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_010720.xsd')
+    # xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_010720.xsd')
+    xsdt = xsdTraverse('D:/Duke/DMREF/simulation_schema/refsim.xsd')
     # xsdt.printTraversal(xsdt.dictform)
-    xsdt.outputLeaf()
+    # xsdt.outputLeaf()
