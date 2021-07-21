@@ -109,7 +109,7 @@ class xsdTraverse():
             ele[:] = sorted(ele, key = lambda x:sequence[x.tag])
         
 if __name__ == '__main__':
-    # xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_010720.xsd')
-    xsdt = xsdTraverse('D:/Duke/DMREF/simulation_schema/refsim.xsd')
-    # xsdt.printTraversal(xsdt.dictform)
-    # xsdt.outputLeaf()
+    xsdt = xsdTraverse('D:/Dropbox/DIBBS/nanomine-schema/xml/PNC_schema_041220.xsd')
+    # xsdt = xsdTraverse('D:/Duke/DMREF/simulation_schema/refsim.xsd')
+    xsdt.printTraversal(xsdt.dictform)
+    xsdt.outputLeaf()
