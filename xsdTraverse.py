@@ -73,11 +73,11 @@ class xsdTraverse():
             self.leaf.append(xpath + '/' + dictform)
 
     # a funtion that outputs the collected xpath of leaf nodes to csv
-    def outputLeaf(self):
-        with open('leaf.csv','w',newline="",encoding="utf8") as f:
+    def outputLeaf(self, outname='leaf.csv'):
+        with open(outname,'w',newline="",encoding="utf8") as f:
             for lf in self.leaf:
                 f.write(lf + '\n')
-        print("XPath of leaf nodes is written in leaf.csv")
+        print(f"XPath of leaf nodes is written in {outname}")
 
     def xsd2dicttest(self, testtype):
         # rootName = self.root.attrib['name']
